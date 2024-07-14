@@ -51,7 +51,7 @@ if len(BOT_TOKEN) == 0:
 
 bot_id = BOT_TOKEN.split(':', 1)[0]
 
-DATABASE_URL = environ.get('DATABASE_URL', 'mongodb+srv://file:link@cluster0.jth5g3y.mongodb.net/?retryWrites=true&w=majority')
+DATABASE_URL = environ.get('DATABASE_URL', '')
 if len(DATABASE_URL) == 0:
     DATABASE_URL = None
 
@@ -65,7 +65,7 @@ if DATABASE_URL:
 
 UPSTREAM_REPO = environ.get('UPSTREAM_REPO', '')
 if len(UPSTREAM_REPO) == 0:
-    UPSTREAM_REPO = 'https://github.com/V15HNUF6N1X/Aeon'
+    UPSTREAM_REPO = 'https://github.com/v15hnuf6n1x/Leech_Bot'
 
 UPSTREAM_BRANCH = environ.get('UPSTREAM_BRANCH', '')
 if len(UPSTREAM_BRANCH) == 0:

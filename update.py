@@ -44,7 +44,7 @@ except:
 
 load_dotenv('config.env', override=True)
 
-BOT_TOKEN = environ.get('BOT_TOKEN', '6689255321:AAEQC6xwHikjb5yQKkQIKWK01NX0Nb8bvAU')
+BOT_TOKEN = environ.get('BOT_TOKEN', '')
 if len(BOT_TOKEN) == 0:
     error("BOT_TOKEN variable is missing! Exiting now")
     exit(1)
@@ -65,7 +65,7 @@ if DATABASE_URL:
 
 UPSTREAM_REPO = environ.get('UPSTREAM_REPO', '')
 if len(UPSTREAM_REPO) == 0:
-    UPSTREAM_REPO = 'https://github.com/v15hnuf6n1x/Leech_Bot'
+    UPSTREAM_REPO = 'https://github.com/5hojib/Aeon'
 
 UPSTREAM_BRANCH = environ.get('UPSTREAM_BRANCH', '')
 if len(UPSTREAM_BRANCH) == 0:
@@ -75,8 +75,8 @@ if path.exists('.git'):
     run(["rm", "-rf", ".git"])
 
 update = run([f"git init -q \
-                 && git config --global user.email vishnuvishva2434@gmail.com \
-                 && git config --global user.name v15hnuf6n1x \
+                 && git config --global user.email yesiamshojib@gmail.com \
+                 && git config --global user.name 5hojib \
                  && git add . \
                  && git commit -sm update -q \
                  && git remote add origin {UPSTREAM_REPO} \

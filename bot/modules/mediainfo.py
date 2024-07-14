@@ -25,7 +25,7 @@ section_dict = {
 }
 
 async def gen_mediainfo(message, link=None, media=None, msg=None):
-    temp_send = await sendMessage(message, 'Generating MediaInfo...')
+    temp_send = await sendMessage(message, 'Generating 📃MediaInfo...')
     try:
         path = "Mediainfo/"
         if not await aiopath.isdir(path):

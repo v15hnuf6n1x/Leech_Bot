@@ -49,20 +49,20 @@ async def load_config():
     if len(BOT_TOKEN) == 0:
         BOT_TOKEN = config_dict['BOT_TOKEN']
 
-    TELEGRAM_API = environ.get('TELEGRAM_API', 21165589)
+    TELEGRAM_API = environ.get('TELEGRAM_API', '')
     if len(TELEGRAM_API) == 0:
         TELEGRAM_API = config_dict['TELEGRAM_API']
     else:
         TELEGRAM_API = int(TELEGRAM_API)
 
-    TELEGRAM_HASH = environ.get('TELEGRAM_HASH', )
+    TELEGRAM_HASH = environ.get('TELEGRAM_HASH', '')
     if len(TELEGRAM_HASH) == 0:
         TELEGRAM_HASH = config_dict['TELEGRAM_HASH']
 
     BOT_MAX_TASKS = environ.get('BOT_MAX_TASKS', '')
-    BOT_MAX_TASKS = int(BOT_MAX_TASKS) if BOT_MAX_TASKS.isdigit() else '10'
+    BOT_MAX_TASKS = int(BOT_MAX_TASKS) if BOT_MAX_TASKS.isdigit() else ''
 
-    OWNER_ID = environ.get('OWNER_ID', 2048030675)
+    OWNER_ID = environ.get('OWNER_ID', '')
     OWNER_ID = config_dict['OWNER_ID'] if len(OWNER_ID) == 0 else int(OWNER_ID)
 
     GROUPS_EMAIL = environ.get('GROUPS_EMAIL', '')
@@ -71,7 +71,7 @@ async def load_config():
 
     DATABASE_URL = environ.get('DATABASE_URL', '')
     if len(DATABASE_URL) == 0:
-        DATABASE_URL = 'mongodb+srv://file:link@cluster0.jth5g3y.mongodb.net/?retryWrites=true&w=majority'
+        DATABASE_URL = ''
 
     GDRIVE_ID = environ.get('GDRIVE_ID', '')
     if len(GDRIVE_ID) == 0:
@@ -215,25 +215,25 @@ async def load_config():
     if len(UPSTREAM_BRANCH) == 0:
         UPSTREAM_BRANCH = 'main'
 
-    TORRENT_LIMIT = environ.get('TORRENT_LIMIT', 400)
+    TORRENT_LIMIT = environ.get('TORRENT_LIMIT', '')
     TORRENT_LIMIT = '' if len(TORRENT_LIMIT) == 0 else float(TORRENT_LIMIT)
 
-    DIRECT_LIMIT = environ.get('DIRECT_LIMIT', 400)
+    DIRECT_LIMIT = environ.get('DIRECT_LIMIT', '')
     DIRECT_LIMIT = '' if len(DIRECT_LIMIT) == 0 else float(DIRECT_LIMIT)
 
-    YTDLP_LIMIT = environ.get('YTDLP_LIMIT', 400)
+    YTDLP_LIMIT = environ.get('YTDLP_LIMIT', '')
     YTDLP_LIMIT = '' if len(YTDLP_LIMIT) == 0 else float(YTDLP_LIMIT)
 
-    GDRIVE_LIMIT = environ.get('GDRIVE_LIMIT', 400)
+    GDRIVE_LIMIT = environ.get('GDRIVE_LIMIT', '')
     GDRIVE_LIMIT = '' if len(GDRIVE_LIMIT) == 0 else float(GDRIVE_LIMIT)
 
-    CLONE_LIMIT = environ.get('CLONE_LIMIT', 400)
+    CLONE_LIMIT = environ.get('CLONE_LIMIT', '')
     CLONE_LIMIT = '' if len(CLONE_LIMIT) == 0 else float(CLONE_LIMIT)
 
     MEGA_LIMIT = environ.get('MEGA_LIMIT', '')
     MEGA_LIMIT = '' if len(MEGA_LIMIT) == 0 else float(MEGA_LIMIT)
 
-    LEECH_LIMIT = environ.get('LEECH_LIMIT', 400)
+    LEECH_LIMIT = environ.get('LEECH_LIMIT', '')
     LEECH_LIMIT = '' if len(LEECH_LIMIT) == 0 else float(LEECH_LIMIT)
 
     DELETE_LINKS = environ.get('DELETE_LINKS', '')
@@ -247,11 +247,11 @@ async def load_config():
     if len(MIRROR_LOG_ID) == 0:
         MIRROR_LOG_ID = ''
 
-    ATTACHMENT_URL = environ.get('ATTACHMENT_URL', )
+    ATTACHMENT_URL = environ.get('ATTACHMENT_URL', '')
     if len(ATTACHMENT_URL) == 0:
         ATTACHMENT_URL = ''
     
-    USER_MAX_TASKS = environ.get('USER_MAX_TASKS', 6)
+    USER_MAX_TASKS = environ.get('USER_MAX_TASKS', '')
     USER_MAX_TASKS = '' if len(USER_MAX_TASKS) == 0 else int(USER_MAX_TASKS)
 
     PLAYLIST_LIMIT = environ.get('PLAYLIST_LIMIT', '')
@@ -261,7 +261,7 @@ async def load_config():
     IMAGES = (IMAGES.replace("'", '').replace('"', '').replace(
         '[', '').replace(']', '').replace(",", "")).split()
 
-    SET_COMMANDS = environ.get('SET_COMMANDS', 'True')
+    SET_COMMANDS = environ.get('SET_COMMANDS', '')
     SET_COMMANDS = SET_COMMANDS.lower() == 'true'
 
     TOKEN_TIMEOUT = environ.get('TOKEN_TIMEOUT', '')
@@ -411,9 +411,9 @@ async def get_buttons(key=None, edit_type=None, edit_mode=None, mess=None):
             msg += 'Send a valid value for the above Var. <b>Timeout:</b> 60 sec'
         if key in bool_vars:
             if not (value := config_dict.get(key)):
-                buttons.ibutton('Make it True', f"botset boolvar {key} on")
+            	  buttons.ibutton('Make it True', f"botset boolvar {key} on")
             else:
-                buttons.ibutton('Make it False', f"botset boolvar {key} off")
+            	  buttons.ibutton('Make it False', f"botset boolvar {key} off")
     button = buttons.build_menu(1) if key is None else buttons.build_menu(2)
     return msg, button
 

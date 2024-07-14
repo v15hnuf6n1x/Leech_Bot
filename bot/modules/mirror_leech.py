@@ -7,7 +7,7 @@ from asyncio import sleep
 from aiofiles import open as aiopen
 from aiofiles.os import path as aiopath
 from cloudscraper import create_scraper
-from bot.helper.aeon_utils.send_react import send_react
+
 from bot import bot, LOGGER, config_dict, bot_name, user_data
 from bot.helper.ext_utils.bot_utils import is_url, is_magnet, is_mega_link, is_gdrive_link, get_content_type, new_task, sync_to_async, is_rclone_path, is_telegram_link, arg_parser, fetch_user_tds
 from bot.helper.ext_utils.exceptions import DirectDownloadLinkException
@@ -27,15 +27,12 @@ from bot.helper.telegram_helper.message_utils import sendMessage, editMessage, g
 from bot.helper.listeners.tasks_listener import MirrorLeechListener
 from bot.helper.ext_utils.help_strings import MIRROR_HELP_MESSAGE
 from bot.helper.ext_utils.bulk_links import extract_bulk_links
+from bot.helper.aeon_utils.send_react import send_react
 from bot.helper.mirror_leech_utils.download_utils.direct_downloader import add_direct_download
 from bot.helper.aeon_utils.nsfw_check import nsfw_precheck
-import asyncio
 
 @new_task
 async def _mirror_leech(client, message, isQbit=False, isLeech=False, sameDir=None, bulk=[]):
-    sticker_message = await message.reply_sticker("CAACAgUAAxkBAAEZdx5mJhT9pCwLp94Kh19c6VwWtSWYNQAC5AQAAi51CFWx4vp0ZASxejQE")
-    await asyncio.sleep(2)
-    await sticker_message.delete()
     await send_react(message)
     user_id      = message.from_user.id
     user_dict    = user_data.get(user_id, {})
@@ -95,15 +92,16 @@ async def _mirror_leech(client, message, isQbit=False, isLeech=False, sameDir=No
 
     if link:
     	  if is_magnet(link) or link.endswith('.torrent'):
-              isQbit = True
+    	  	  isQbit = True
     elif not link and (reply_to := message.reply_to_message):
         if reply_to.text:
             reply_text = reply_to.text.split('\n', 1)[0].strip()
             if reply_text and is_magnet(reply_text):
                 isQbit = True
     if reply_to := message.reply_to_message:
-        file_ = getattr(reply_to, reply_to.media.value) if reply_to.media else None
-        if reply_to.document and (file_.mime_type == 'application/x-bittorrent' or file_.file_name.endswith('.torrent')):isQbit = True
+    	  file_ = getattr(reply_to, reply_to.media.value) if reply_to.media else None
+    	  if reply_to.document and (file_.mime_type == 'application/x-bittorrent' or file_.file_name.endswith('.torrent')):
+    	      isQbit = True
     if not isinstance(seed, bool):
         dargs = seed.split(':')
         ratio = dargs[0] or None
